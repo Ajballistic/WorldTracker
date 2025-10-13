@@ -2,12 +2,36 @@
 <html>
     <head>
         <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+        <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     </head>
     <body>
-        <ul>
+        <div id="app">
             {% for stat in stats %}
-                <li>{{ stat }}</li>
+                <div @click = "{{stat}} = !{{stat}}">{{ stat }}</div>
+                <div v-if="{{stat}}" class="bg-blue-200">
+                    {{stat}} test message
+                </div>
             {% endfor %}
-        </ul>
+        </div>
     </body>
+    <script>
+        const app = Vue.createApp({
+        delimiters: ['[[', ']]'],
+        data() {
+            return {
+                dropped : false,
+                crafted : false,
+                killed : false,
+                broken : false,
+                killed_by : false,
+                picked_up : false,
+                custom : false,
+                used : false,
+                mined : false
+            }
+        }
+    })
+
+ app.mount('#app') 
+    </script>
 </html>
