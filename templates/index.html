@@ -6,10 +6,10 @@
     </head>
     <body>
         <div id="app">
-            {% for stat in stats %}
-                <div @click = "{{stat}} = !{{stat}}">{{ stat }}</div>
-                <div v-if="{{stat}}" class="bg-blue-200">
-                    {{stat}} test message
+            {% for statGroup in stats %}
+                <div @click = "{{statGroup}} = !{{statGroup}}">{{ statGroup }}</div>
+                <div v-if="{{statGroup}}" class="bg-blue-200">
+                    {{stats[statGroup]}}
                 </div>
             {% endfor %}
         </div>

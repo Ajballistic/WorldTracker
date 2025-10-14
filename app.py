@@ -10,6 +10,8 @@ def index():
         data = json.load(file)
         new_data = copy.deepcopy(data)
         for stat_type in data["stats"]:
+            for stat in data["stats"][stat_type]:
+                new_data["stats"][stat_type][stat.replace("minecraft:","")] = new_data["stats"][stat_type].pop(stat)
             new_data["stats"][stat_type.replace("minecraft:","")] = new_data["stats"].pop(stat_type)
     return render_template("index.html", stats = new_data["stats"])
 
