@@ -9,7 +9,9 @@
             {% for statGroup in stats %}
                 <div @click = "{{statGroup}} = !{{statGroup}}">{{ statGroup }}</div>
                 <div v-if="{{statGroup}}" class="bg-blue-200">
-                    {{stats[statGroup]}}
+                    {% for stat in stats[statGroup] %}
+                        <div>{{stat}}</div>
+                    {% endfor %}
                 </div>
             {% endfor %}
         </div>
