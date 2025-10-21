@@ -6,14 +6,15 @@
     </head>
     <body>
         <div id="app">
-            {% for statGroup in stats %}
-                <div @click = "{{statGroup}} = !{{statGroup}}">{{ statGroup }}</div>
-                <div v-if="{{statGroup}}" class="bg-blue-200">
-                    {% for stat in stats[statGroup] %}
-                        <div>{{stat}}</div>
-                    {% endfor %}
+            Value = [[value]]
+            <div v-for="(statGroup, key) in stats" :key="key">
+                <div @click="toggle(key)">[[key]]</div>
+                <div v-if="getGroup(key)">
+                    <div @click="value=stat" v-for="(stat, statkey) in statGroup" :key="statkey">
+                        [[statkey]]
+                    </div>
                 </div>
-            {% endfor %}
+            </div>
         </div>
     </body>
     <script>
@@ -21,6 +22,8 @@
         delimiters: ['[[', ']]'],
         data() {
             return {
+                stats: JSON.parse('{{ stats | safe }}'),
+                value : 0,
                 dropped : false,
                 crafted : false,
                 killed : false,
@@ -30,6 +33,14 @@
                 custom : false,
                 used : false,
                 mined : false
+            }
+        },
+        methods:{
+            toggle(group){
+                this[group] = !(this[group])
+            },
+            getGroup(group){
+                return this[group]
             }
         }
     })
